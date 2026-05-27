@@ -340,6 +340,89 @@ footer{
   border-top:1px solid rgba(255,255,255,.08);
 }
 
+
+/* Admin Panel */
+.admin-float{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:1001;
+}
+.admin-float button{
+  width:auto;
+  padding:13px 18px;
+  border-radius:999px;
+  box-shadow:0 0 30px rgba(103,232,249,.25);
+}
+.admin-modal{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(2,6,23,.72);
+  backdrop-filter:blur(12px);
+}
+.admin-modal.active{display:flex}
+.admin-box{
+  width:min(430px,100%);
+  background:rgba(2,6,23,.96);
+  border:1px solid rgba(103,232,249,.25);
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 35px 100px rgba(0,0,0,.55);
+}
+.admin-box h2{
+  color:#67e8f9;
+  margin-bottom:10px;
+}
+.admin-box p{
+  color:#cbd5e1;
+  margin-bottom:20px;
+}
+.admin-tools{
+  display:none;
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.admin-tools.active{display:block}
+.admin-label{
+  display:block;
+  color:#e2e8f0;
+  margin:16px 0 8px;
+  font-weight:bold;
+}
+.admin-close{
+  margin-top:12px;
+  background:rgba(255,255,255,.08);
+  color:white;
+  border:1px solid rgba(255,255,255,.14);
+}
+.hero.custom-hero-image{
+  position:relative;
+  background-size:cover !important;
+  background-position:center !important;
+}
+.hero.custom-hero-image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(2,6,23,.88),rgba(2,6,23,.55));
+  z-index:0;
+}
+.hero.custom-hero-image > *{
+  position:relative;
+  z-index:1;
+}
+.upload-preview{
+  margin-top:12px;
+  color:#94a3b8;
+  font-size:.9rem;
+}
+
 /* Mobile */
 @media(max-width:900px){
   header{padding:15px 5%}
@@ -482,6 +565,31 @@ footer{
   </div>
 </section>
 
+
+<div class="admin-float">
+  <button onclick="abrirAdmin()">Admin</button>
+</div>
+
+<div class="admin-modal" id="adminModal">
+  <div class="admin-box">
+    <h2>Panel Admin</h2>
+    <p>Ingresa la clave para modificar elementos visuales de la página.</p>
+
+    <input type="password" id="adminPass" placeholder="Clave admin">
+    <button onclick="entrarAdmin()">Entrar</button>
+
+    <div class="admin-tools" id="adminTools">
+      <label class="admin-label">Cambiar imagen principal del inicio</label>
+      <input type="file" id="heroImageUploader" accept="image/*">
+      <div class="upload-preview" id="uploadStatus">No hay imagen nueva seleccionada.</div>
+
+      <button onclick="resetHeroImage()" class="admin-close">Quitar imagen guardada</button>
+    </div>
+
+    <button onclick="cerrarAdmin()" class="admin-close">Cerrar</button>
+  </div>
+</div>
+
 <footer>
   © 2026 Statistical Edge — Trading, riesgo, datos y consistencia.
 </footer>
@@ -534,6 +642,63 @@ function calcularRiesgo(){
     Relación riesgo-beneficio: 1:${reward}
   `;
 }
+
+function abrirAdmin(){
+  document.getElementById("adminModal").classList.add("active");
+}
+
+function cerrarAdmin(){
+  document.getElementById("adminModal").classList.remove("active");
+}
+
+function entrarAdmin(){
+  const pass=document.getElementById("adminPass").value;
+  if(pass==="Samux125"){
+    document.getElementById("adminTools").classList.add("active");
+    document.getElementById("uploadStatus").innerHTML="Modo administrador activado.";
+  }else{
+    alert("Clave incorrecta");
+  }
+}
+
+function aplicarHeroImage(imageData){
+  const hero=document.querySelector(".hero");
+  hero.classList.add("custom-hero-image");
+  hero.style.backgroundImage=`url(${imageData})`;
+}
+
+function resetHeroImage(){
+  localStorage.removeItem("statisticalEdgeHeroImage");
+  const hero=document.querySelector(".hero");
+  hero.classList.remove("custom-hero-image");
+  hero.style.backgroundImage="";
+  document.getElementById("uploadStatus").innerHTML="Imagen principal eliminada.";
+}
+
+const heroUploader=document.getElementById("heroImageUploader");
+if(heroUploader){
+  heroUploader.addEventListener("change",function(e){
+    const file=e.target.files[0];
+    if(!file)return;
+
+    const reader=new FileReader();
+    reader.onload=function(event){
+      const imageData=event.target.result;
+      aplicarHeroImage(imageData);
+      localStorage.setItem("statisticalEdgeHeroImage",imageData);
+      document.getElementById("uploadStatus").innerHTML="Imagen principal actualizada y guardada en este navegador.";
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+window.addEventListener("load",()=>{
+  const savedImage=localStorage.getItem("statisticalEdgeHeroImage");
+  if(savedImage){
+    aplicarHeroImage(savedImage);
+  }
+});
+
 </script>
 
 </body>
