@@ -1,284 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Statistical Edge | Trading & Risk Management</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Statistical Edge | Premium Trading System</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  font-family:Arial, sans-serif;
-  background:#07111f;
-  color:white;
-  line-height:1.6;
+  font-family:Inter,Arial,sans-serif;
+  background:#020617;
+  color:#fff;
+  overflow-x:hidden;
 }
-
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,255,255,.18),transparent 30%),
+    radial-gradient(circle at 80% 10%,rgba(59,130,246,.18),transparent 35%),
+    radial-gradient(circle at 50% 90%,rgba(34,197,94,.12),transparent 35%);
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:45px 45px;
+  z-index:-1;
+}
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 8%;
-  background:rgba(7,17,31,.85);
-  backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 7%;
+  background:rgba(2,6,23,.75);
+  backdrop-filter:blur(18px);
   border-bottom:1px solid rgba(255,255,255,.08);
 }
-
 .logo{
-  font-size:1.4rem;
-  font-weight:bold;
-  color:#45f3ff;
+  font-size:1.35rem;
+  font-weight:900;
+  letter-spacing:.5px;
+  color:#67e8f9;
 }
-
-nav{
-  display:flex;
-  gap:22px;
-}
-
+nav{display:flex;gap:22px}
 nav a{
-  color:white;
-  text-decoration:none;
-  font-size:.95rem;
-  opacity:.85;
+  color:#cbd5e1;text-decoration:none;font-size:.95rem;
 }
-
-nav a:hover{
-  color:#45f3ff;
-}
-
+nav a:hover{color:#67e8f9}
 .hero{
-  min-height:90vh;
+  min-height:92vh;
   display:grid;
-  grid-template-columns:1.2fr .8fr;
+  grid-template-columns:1.1fr .9fr;
+  gap:45px;
   align-items:center;
-  gap:40px;
-  padding:80px 8%;
-  background:
-    radial-gradient(circle at top left, rgba(69,243,255,.18), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(0,255,150,.12), transparent 35%);
+  padding:85px 7%;
 }
-
 .badge{
-  display:inline-block;
-  padding:8px 14px;
-  border:1px solid rgba(69,243,255,.4);
-  border-radius:30px;
-  color:#45f3ff;
-  margin-bottom:18px;
-  font-size:.9rem;
-}
-
-.hero h1{
-  font-size:clamp(2.3rem, 6vw, 5rem);
-  line-height:1.05;
+  display:inline-flex;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(103,232,249,.1);
+  border:1px solid rgba(103,232,249,.35);
+  color:#67e8f9;
   margin-bottom:22px;
 }
-
-.hero h1 span{
-  color:#45f3ff;
+h1{
+  font-size:clamp(2.6rem,6vw,5.6rem);
+  line-height:.98;
+  margin-bottom:25px;
 }
-
+h1 span{
+  background:linear-gradient(90deg,#67e8f9,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
 .hero p{
-  font-size:1.1rem;
   color:#cbd5e1;
   max-width:650px;
+  font-size:1.1rem;
   margin-bottom:30px;
 }
-
-.buttons{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
+.actions{display:flex;gap:15px;flex-wrap:wrap}
 .btn{
-  display:inline-block;
-  padding:14px 24px;
-  border-radius:12px;
-  background:#45f3ff;
-  color:#07111f;
-  font-weight:bold;
+  padding:15px 24px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#67e8f9,#22c55e);
+  color:#020617;
   text-decoration:none;
+  font-weight:900;
+  box-shadow:0 0 30px rgba(103,232,249,.25);
 }
-
-.btn.secondary{
-  background:transparent;
-  color:white;
-  border:1px solid rgba(255,255,255,.25);
+.btn.alt{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:none;
 }
-
-.panel{
+.dashboard{
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.12);
-  border-radius:24px;
+  border-radius:30px;
   padding:28px;
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
 }
-
-.panel h2{
-  color:#45f3ff;
-  font-size:2.6rem;
+.chart{
+  height:240px;
+  border-radius:24px;
+  background:
+    linear-gradient(180deg,rgba(103,232,249,.18),transparent),
+    rgba(2,6,23,.7);
+  position:relative;
+  overflow:hidden;
+  margin-bottom:20px;
 }
-
-.panel-item{
-  padding:18px 0;
-  border-bottom:1px solid rgba(255,255,255,.1);
+.chart svg{
+  width:100%;height:100%;
 }
-
-.panel-item:last-child{
-  border-bottom:none;
+.chart path{
+  fill:none;
+  stroke:#67e8f9;
+  stroke-width:4;
+  filter:drop-shadow(0 0 10px #67e8f9);
 }
-
-section{
-  padding:80px 8%;
-}
-
-.section-title{
-  text-align:center;
-  max-width:750px;
-  margin:0 auto 45px;
-}
-
-.section-title h2{
-  font-size:2.3rem;
-  margin-bottom:12px;
-}
-
-.section-title p{
-  color:#cbd5e1;
-}
-
-.stats{
+.dash-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
 }
-
-.stat, .box, .faq{
+.metric{
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;
-  padding:25px;
+  padding:18px;
+  border-radius:18px;
 }
-
-.stat h3{
-  color:#45f3ff;
-  font-size:2rem;
+.metric strong{
+  display:block;
+  color:#67e8f9;
+  font-size:1.5rem;
 }
-
+section{padding:80px 7%}
+.title{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 45px;
+}
+.title h2{
+  font-size:2.5rem;
+  margin-bottom:12px;
+}
+.title p{color:#cbd5e1}
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:22px;
 }
-
-.box h3{
-  margin-bottom:12px;
-  color:#45f3ff;
-}
-
-.box p, .faq p{
-  color:#cbd5e1;
-}
-
-.formula{
-  background:#020817;
-  border-left:4px solid #45f3ff;
-  padding:25px;
-  border-radius:15px;
-  font-size:1.1rem;
-  color:#e2e8f0;
-  max-width:900px;
-  margin:30px auto 0;
-}
-
-.calculator{
-  max-width:600px;
-  margin:auto;
-  background:rgba(255,255,255,.06);
+.card{
+  background:rgba(255,255,255,.065);
   border:1px solid rgba(255,255,255,.12);
-  border-radius:24px;
+  border-radius:26px;
   padding:28px;
+  transition:.3s;
 }
-
-.calculator input{
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(103,232,249,.45);
+  box-shadow:0 25px 80px rgba(103,232,249,.08);
+}
+.card h3{color:#67e8f9;margin-bottom:12px;font-size:1.35rem}
+.card p{color:#cbd5e1}
+.formula{
+  max-width:950px;
+  margin:auto;
+  background:linear-gradient(135deg,rgba(103,232,249,.12),rgba(34,197,94,.08));
+  border:1px solid rgba(103,232,249,.22);
+  border-radius:24px;
+  padding:30px;
+  color:#e2e8f0;
+  text-align:center;
+  font-size:1.15rem;
+}
+.calculator{
+  max-width:650px;
+  margin:auto;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:30px;
+  padding:30px;
+}
+input{
   width:100%;
-  padding:15px;
+  padding:16px;
   margin-bottom:15px;
-  border:none;
-  border-radius:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(2,6,23,.8);
+  color:white;
   outline:none;
-  font-size:1rem;
 }
-
-.calculator button{
+button{
   width:100%;
-  padding:15px;
-  border:none;
-  border-radius:12px;
-  background:#45f3ff;
-  color:#07111f;
-  font-weight:bold;
-  font-size:1rem;
+  padding:16px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#67e8f9,#22c55e);
+  color:#020617;
+  font-weight:900;
   cursor:pointer;
 }
-
 #resultado{
-  margin-top:20px;
-  padding:18px;
-  background:#020817;
-  border-radius:14px;
-  color:#e2e8f0;
   display:none;
+  margin-top:20px;
+  padding:20px;
+  border-radius:18px;
+  background:#020617;
+  border:1px solid rgba(103,232,249,.25);
 }
-
 footer{
-  padding:30px 8%;
   text-align:center;
+  padding:35px 7%;
   color:#94a3b8;
   border-top:1px solid rgba(255,255,255,.08);
 }
-
 @media(max-width:900px){
-  header{
-    flex-direction:column;
-    gap:15px;
-  }
-
-  nav{
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-
-  .hero p{
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .buttons{
-    justify-content:center;
-  }
-
-  .stats, .grid{
-    grid-template-columns:1fr;
-  }
+  header{flex-direction:column;gap:15px}
+  nav{flex-wrap:wrap;justify-content:center}
+  .hero{grid-template-columns:1fr;text-align:center}
+  .actions{justify-content:center}
+  .grid,.dash-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -289,8 +242,7 @@ footer{
   <div class="logo">Statistical Edge</div>
   <nav>
     <a href="#inicio">Inicio</a>
-    <a href="#metricas">Métricas</a>
-    <a href="#ventaja">Ventaja</a>
+    <a href="#sistema">Sistema</a>
     <a href="#riesgo">Riesgo</a>
     <a href="#fondeo">Fondeo</a>
     <a href="#calculadora">Calculadora</a>
@@ -299,74 +251,59 @@ footer{
 
 <section class="hero" id="inicio">
   <div>
-    <span class="badge">Trading profesional basado en datos</span>
-    <h1>La ventaja no está en adivinar. <span>Está en ejecutar mejor.</span></h1>
+    <div class="badge">Sistema premium de trading basado en datos</div>
+    <h1>Ejecuta con ventaja. <span>Protege tu capital.</span></h1>
     <p>
-      Sistema educativo enfocado en gestión de riesgo, ventaja estadística,
-      disciplina operativa y protección de capital para traders con cuentas reales
-      o fondeadas.
+      Plataforma educativa diseñada para traders que buscan operar con gestión,
+      consistencia, estadística y disciplina profesional en cuentas reales o fondeadas.
     </p>
-
-    <div class="buttons">
-      <a href="#calculadora" class="btn">Calcular riesgo</a>
-      <a href="#ventaja" class="btn secondary">Ver estrategia</a>
+    <div class="actions">
+      <a class="btn" href="#calculadora">Calcular riesgo</a>
+      <a class="btn alt" href="#sistema">Ver sistema</a>
     </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-item">
-      <h2>0.5%</h2>
-      <p>Riesgo sugerido por operación</p>
+  <div class="dashboard">
+    <div class="chart">
+      <svg viewBox="0 0 500 240">
+        <path d="M20 190 C70 150, 95 170, 130 130 S190 80, 230 110 S300 170, 350 90 S430 45, 480 65"/>
+      </svg>
     </div>
 
-    <div class="panel-item">
-      <h2>1:2 / 1:3</h2>
-      <p>Relación riesgo-beneficio profesional</p>
-    </div>
-
-    <div class="panel-item">
-      <h2>Disciplina</h2>
-      <p>La base real de la consistencia</p>
+    <div class="dash-grid">
+      <div class="metric"><strong>0.5%</strong>Riesgo</div>
+      <div class="metric"><strong>1:3</strong>RR ideal</div>
+      <div class="metric"><strong>DD</strong>Control</div>
     </div>
   </div>
 </section>
 
-<section id="metricas">
-  <div class="section-title">
-    <h2>Métricas Clave</h2>
-    <p>Una operación aislada no define al trader. La ventaja aparece cuando se mide el sistema a largo plazo.</p>
+<section id="sistema">
+  <div class="title">
+    <h2>Sistema de Ventaja Estadística</h2>
+    <p>La consistencia no nace de una operación perfecta, sino de repetir un proceso medible.</p>
   </div>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>RR</h3>
-      <p>Relación riesgo-beneficio</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Expectativa Positiva</h3>
+      <p>Medir probabilidad, pérdida promedio y ganancia promedio para validar si el sistema tiene ventaja real.</p>
     </div>
-
-    <div class="stat">
-      <h3>WR</h3>
-      <p>Porcentaje de acierto</p>
+    <div class="card">
+      <h3>Ejecución Limpia</h3>
+      <p>Entrar solo cuando el plan lo permite, evitando impulsos, sobreoperación y presión emocional.</p>
     </div>
-
-    <div class="stat">
-      <h3>DD</h3>
-      <p>Control del drawdown</p>
-    </div>
-
-    <div class="stat">
-      <h3>PF</h3>
-      <p>Profit factor del sistema</p>
+    <div class="card">
+      <h3>Datos sobre Emoción</h3>
+      <p>Cada decisión debe apoyarse en reglas, métricas y gestión, no en miedo o euforia.</p>
     </div>
   </div>
 </section>
 
-<section id="ventaja">
-  <div class="section-title">
-    <h2>Ventaja Estadística</h2>
-    <p>
-      La ventaja estadística no significa ganar siempre. Significa que, después de muchas operaciones,
-      el sistema tiene expectativa positiva.
-    </p>
+<section>
+  <div class="title">
+    <h2>Fórmula Principal</h2>
+    <p>La ventaja se mide con expectativa, no con suerte.</p>
   </div>
 
   <div class="formula">
@@ -375,120 +312,66 @@ footer{
 </section>
 
 <section id="riesgo">
-  <div class="section-title">
-    <h2>Gestión de Riesgo</h2>
-    <p>El primer objetivo no es ganar rápido. Es sobrevivir el tiempo suficiente para que la ventaja pueda trabajar.</p>
+  <div class="title">
+    <h2>Gestión de Riesgo Profesional</h2>
+    <p>Primero se protege la cuenta. Luego se busca crecimiento.</p>
   </div>
 
   <div class="grid">
-    <div class="box">
+    <div class="card">
       <h3>Riesgo Controlado</h3>
-      <p>Usar entre 0.25% y 1% por operación para evitar pérdidas emocionales y proteger el capital.</p>
+      <p>Operar entre 0.25% y 1% por entrada reduce el impacto emocional y financiero.</p>
     </div>
-
-    <div class="box">
+    <div class="card">
       <h3>Drawdown Bajo</h3>
-      <p>Un trader profesional protege la cuenta antes de buscar grandes ganancias.</p>
+      <p>Evitar caídas profundas permite mantener claridad mental y continuidad operativa.</p>
     </div>
-
-    <div class="box">
-      <h3>Reglas Claras</h3>
-      <p>Entrada, salida, stop loss, objetivo y límite diario deben estar definidos antes de operar.</p>
+    <div class="card">
+      <h3>Plan Diario</h3>
+      <p>Límite de pérdida, máximo de operaciones y reglas claras antes de abrir el gráfico.</p>
     </div>
   </div>
 </section>
 
 <section id="fondeo">
-  <div class="section-title">
-    <h2>Estrategia para Cuentas Fondeadas</h2>
-    <p>El reto no es solo pasar una prueba. El reto es mantener la cuenta sin romper reglas.</p>
+  <div class="title">
+    <h2>Enfoque para Cuentas Fondeadas</h2>
+    <p>Pasar una prueba no es suficiente. La clave es mantener la cuenta.</p>
   </div>
 
   <div class="grid">
-    <div class="box">
-      <h3>Fase 1: Supervivencia</h3>
-      <p>Respetar límites, evitar sobreoperar y mantener bajo el riesgo por operación.</p>
+    <div class="card">
+      <h3>Fase 1</h3>
+      <p>Supervivencia, control y ejecución conservadora.</p>
     </div>
-
-    <div class="box">
-      <h3>Fase 2: Consistencia</h3>
-      <p>Buscar crecimiento gradual, con operaciones bien filtradas y sin presión emocional.</p>
+    <div class="card">
+      <h3>Fase 2</h3>
+      <p>Consistencia, bajo drawdown y crecimiento gradual.</p>
     </div>
-
-    <div class="box">
-      <h3>Fase 3: Escalamiento</h3>
-      <p>Aumentar resultados sin aumentar impulsividad ni romper el plan de riesgo.</p>
-    </div>
-  </div>
-</section>
-
-<section id="psicologia">
-  <div class="section-title">
-    <h2>Psicología del Trader</h2>
-    <p>La mente del trader es tan importante como la estrategia. Sin control emocional, la ventaja se destruye.</p>
-  </div>
-
-  <div class="grid">
-    <div class="box">
-      <h3>Paciencia</h3>
-      <p>No todas las oportunidades merecen una entrada. Esperar también es parte del sistema.</p>
-    </div>
-
-    <div class="box">
-      <h3>Disciplina</h3>
-      <p>Seguir el plan cuando hay presión separa al trader impulsivo del trader profesional.</p>
-    </div>
-
-    <div class="box">
-      <h3>Control Emocional</h3>
-      <p>Evitar venganza, miedo, euforia y exceso de confianza después de ganar o perder.</p>
+    <div class="card">
+      <h3>Fase 3</h3>
+      <p>Escalar sin romper reglas ni aumentar impulsividad.</p>
     </div>
   </div>
 </section>
 
 <section id="calculadora">
-  <div class="section-title">
-    <h2>Calculadora de Riesgo</h2>
-    <p>Calcula cuánto dinero arriesgas y cuál sería tu posible ganancia según tu relación riesgo-beneficio.</p>
+  <div class="title">
+    <h2>Calculadora Premium de Riesgo</h2>
+    <p>Calcula pérdida potencial, ganancia estimada y relación riesgo-beneficio.</p>
   </div>
 
   <div class="calculator">
     <input type="number" id="balance" placeholder="Balance de la cuenta">
     <input type="number" id="risk" placeholder="Riesgo % por operación">
-    <input type="number" id="reward" placeholder="Relación beneficio, ejemplo 2 o 3">
-
-    <button onclick="calcularRiesgo()">Calcular riesgo</button>
-
+    <input type="number" id="reward" placeholder="Relación beneficio: ejemplo 2 o 3">
+    <button onclick="calcularRiesgo()">Calcular ahora</button>
     <div id="resultado"></div>
   </div>
 </section>
 
-<section id="faq">
-  <div class="section-title">
-    <h2>Preguntas Frecuentes</h2>
-    <p>Conceptos básicos para entender mejor el enfoque del sistema.</p>
-  </div>
-
-  <div class="grid">
-    <div class="faq">
-      <h3>¿Esto garantiza ganancias?</h3>
-      <p>No. El trading siempre implica riesgo. El objetivo es operar con reglas, control y expectativa positiva.</p>
-    </div>
-
-    <div class="faq">
-      <h3>¿Cuál riesgo es recomendable?</h3>
-      <p>Para cuentas pequeñas o fondeadas, normalmente se recomienda un riesgo conservador entre 0.25% y 1%.</p>
-    </div>
-
-    <div class="faq">
-      <h3>¿Qué es una ventaja estadística?</h3>
-      <p>Es cuando un sistema, medido en muchas operaciones, tiene más expectativa positiva que negativa.</p>
-    </div>
-  </div>
-</section>
-
 <footer>
-  © 2026 Statistical Edge — Proyecto educativo de trading, gestión de riesgo y ventaja estadística.
+  © 2026 Statistical Edge — Trading, riesgo, datos y consistencia.
 </footer>
 
 <script>
@@ -499,21 +382,20 @@ function calcularRiesgo(){
   const resultado = document.getElementById("resultado");
 
   if(!balance || !risk || !reward || balance <= 0 || risk <= 0 || reward <= 0){
-    resultado.style.display = "block";
-    resultado.innerHTML = "Por favor completa todos los campos con valores válidos.";
+    resultado.style.display="block";
+    resultado.innerHTML="Completa todos los campos con valores válidos.";
     return;
   }
 
-  const riesgoDinero = balance * (risk / 100);
-  const gananciaPotencial = riesgoDinero * reward;
-  const perdidaPotencial = riesgoDinero;
+  const perdida = balance * (risk / 100);
+  const ganancia = perdida * reward;
 
-  resultado.style.display = "block";
-  resultado.innerHTML = `
-    <strong>Resultado:</strong><br><br>
+  resultado.style.display="block";
+  resultado.innerHTML=`
+    <strong>Resultado del cálculo</strong><br><br>
     Balance: $${balance.toFixed(2)}<br>
-    Riesgo por operación: $${perdidaPotencial.toFixed(2)}<br>
-    Ganancia potencial: $${gananciaPotencial.toFixed(2)}<br>
+    Riesgo por operación: $${perdida.toFixed(2)}<br>
+    Ganancia potencial: $${ganancia.toFixed(2)}<br>
     Relación riesgo-beneficio: 1:${reward}
   `;
 }
