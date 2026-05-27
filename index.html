@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistical Edge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Statistical Edge</div>
+    <nav>
+      <a href="#ventaja">Ventaja</a>
+      <a href="#riesgo">Riesgo</a>
+      <a href="#fondeo">Fondeo</a>
+      <a href="#calculadora">Calculadora</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>La ventaja no está en adivinar. <span>Está en ejecutar mejor.</span></h1>
+      <p>Trading profesional, gestión de riesgo, ventaja estadística y consistencia para cuentas reales y fondeadas.</p>
+      <a href="#calculadora" class="btn">Calcular riesgo</a>
+    </div>
+
+    <div class="card">
+      <h2>0.5%</h2>
+      <p>Riesgo sugerido por operación</p>
+
+      <h2>1:2 / 1:3</h2>
+      <p>Relación riesgo-beneficio ideal</p>
+
+      <h2>Disciplina</h2>
+      <p>Base principal del sistema</p>
+    </div>
+  </section>
+
+  <section id="ventaja">
+    <h2>Ventaja Estadística</h2>
+    <p>Una ventaja estadística significa que, después de muchas operaciones, el sistema tiene expectativa positiva.</p>
+    <div class="formula">
+      (Probabilidad de ganar × Ganancia promedio) − (Probabilidad de perder × Pérdida promedio)
+    </div>
+  </section>
+
+  <section id="riesgo">
+    <h2>Gestión de Riesgo</h2>
+
+    <div class="grid">
+      <div class="box">
+        <h3>Riesgo Controlado</h3>
+        <p>Usar entre 0.25% y 1% por operación.</p>
+      </div>
+
+      <div class="box">
+        <h3>Drawdown Bajo</h3>
+        <p>Proteger la cuenta antes de buscar grandes ganancias.</p>
+      </div>
+
+      <div class="box">
+        <h3>RR Profesional</h3>
+        <p>Buscar operaciones mínimo 1:2 o idealmente 1:3.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fondeo">
+    <h2>Estrategia para Fondeo</h2>
+
+    <div class="grid">
+      <div class="box">
+        <h3>Fase 1</h3>
+        <p>Supervivencia: respetar límites y proteger capital.</p>
+      </div>
+
+      <div class="box">
+        <h3>Fase 2</h3>
+        <p>Consistencia: crecimiento gradual y controlado.</p>
+      </div>
+
+      <div class="box">
+        <h3>Fase 3</h3>
+        <p>Escalar: aumentar resultados sin aumentar riesgo emocional.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculadora">
+    <h2>Calculadora de Riesgo</h2>
+    <p>Calcula cuánto dinero estás arriesgando por operación.</p>
+
+    <div class="calculator">
+      <input type="number" id="balance" placeholder="Balance de la cuenta">
+      <input type="number" id="risk" placeholder="Riesgo % por operación">
+      <input type="number" id="reward" placeholder="Relación beneficio, ejemplo 2 o 3">
+
+      <button onclick="calcularRiesgo()">Calcular</button>
+
+      <div id="resultado"></div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Statistical Edge — Proyecto educativo de trading
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
